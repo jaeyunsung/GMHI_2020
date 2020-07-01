@@ -1,18 +1,23 @@
 
+# This script shows how to calculate the Gut Microbiome Health Index (GMHI) of a MetaPhlAn2 species-level abundance profile, as demonstrated in Gupta et. al (version June 2020)
+# Author: Vinod K. Gupta, PhD
+
 # Step-1: Run MetaPhlAn2 on a stool metagenome using '--tax_lev s' argument.
 # Step-2: Merge outputs using 'merge_metaphlan_tables.py' script provided in the MetaPhlAn2 pipeline (see MetaPhlAn2's online tutorial).
 # Step-3: Make sure of the following: The merged species' relative abundance profile should be arranged as shown in 'species_relative_abundances.csv'. Accordingly, the first column should contain names of the species-level clades (i.e., taxonomic names with 's__' flag). Subsequent columns should contain the species' relative abundances corresponding to each metagenome sample.
 # Step-4: Save input data from Step-3 as a '.csv' file, and run the following script to calculate GMHI for each stool metagenome. GMHI values for each sample in 'species_relative_abundances.csv' are shown in 'GMHI_output.csv'.
 
-species_profile <- read.csv("/species_relative_abundances.csv", sep = ",", header = TRUE,row.names = 1,check.names = F) # User should change the path to the appropriate directory
+species_profile <- read.csv("./species_relative_abundances.csv", sep = ",", header = TRUE,row.names = 1,check.names = F) # User should change the path to the appropriate directory
 species_profile_1 <- species_profile[-grep('unclassified', row.names(species_profile)),]  # Removing unclassified species
 species_profile_2 <- species_profile_1[-grep('virus', row.names(species_profile_1)),]  # Removing virus species
 species_profile_3 <- sweep(species_profile_2,2,colSums(species_profile_2),`/`) # Re-normalizing to get species relative abundances after removing unclassified and virus species
 species_profile_3[species_profile_3 < 0.00001] <- 0 # Discarding species that are of very low relative abundance from downstream analyses
+
 MH_species <- c("s__Alistipes_senegalensis", "s__Bacteroidales_bacterium_ph8",
              "s__Bifidobacterium_adolescentis", "s__Bifidobacterium_angulatum",
              "s__Bifidobacterium_catenulatum", "s__Lachnospiraceae_bacterium_8_1_57FAA",
              "s__Sutterella_wadsworthensis") # Health-prevalent species
+
 MN_species <- c("s__Anaerotruncus_colihominis", "s__Atopobium_parvulum", "s__Bifidobacterium_dentium",
               "s__Blautia_producta", "s__candidate_division_TM7_single_cell_isolate_TM7c",
               "s__Clostridiales_bacterium_1_7_47FAA", "s__Clostridium_asparagiforme",
@@ -31,6 +36,7 @@ MN_species <- c("s__Anaerotruncus_colihominis", "s__Atopobium_parvulum", "s__Bif
               "s__Streptococcus_sanguinis", "s__Streptococcus_vestibularis",
               "s__Subdoligranulum_sp_4_3_54A2FAA", "s__Subdoligranulum_variabile",
               "s__Veillonella_atypica") # Health-scarce species
+
 MH_species_metagenome <- species_profile_3[row.names(species_profile_3) %in% MH_species, ] # Extracting Health-prevalent species present in metagenome
 MN_species_metagenome <- species_profile_3[row.names(species_profile_3) %in% MN_species, ] # Extracting Health-scarce species present in metagenome
 alpha <- function(x){sum((log(x[x>0]))*(x[x>0]))*(-1)}
