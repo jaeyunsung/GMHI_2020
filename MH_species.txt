@@ -1,0 +1,7 @@
+s__Alistipes_senegalensis
+s__Bacteroidales_bacterium_ph8
+s__Bifidobacterium_adolescentis
+s__Bifidobacterium_angulatum
+s__Bifidobacterium_catenulatum
+s__Lachnospiraceae_bacterium_8_1_57FAA
+s__Sutterella_wadsworthensis
