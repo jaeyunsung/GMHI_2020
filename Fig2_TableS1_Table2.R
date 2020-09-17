@@ -1,5 +1,5 @@
 
-# This script shows how to reproduce the results in Figure 2, Table 2, and Supplementary Table 1 of Gupta et. al (Nature Communications, 2020)
+# This script shows how to reproduce the results in Supplementary Table 1, Table 2, and Figure 2 of Gupta et. al (Nature Communications, 2020)
 # Author: Vinod K. Gupta, PhD
 
 unavailable_pkg <- setdiff(c("ggplot2","ggpubr","vegan","rcompanion"),rownames(installed.packages()))
