@@ -113,10 +113,10 @@ colnames(Accuracy_table) <- c("Fold change", "Difference in coverage b/w healthy
                               "H+ count","H- count","Healthy accuracy","Non-healthy accuracy",
                               "Total accuracy","Total average accuracy")
 
-Supplementary_Table3<-data.frame(Accuracy_table)
-Supplementary_Table3<-Supplementary_Table3[,c(1:4,8)]
+Supplementary_Table1<-data.frame(Accuracy_table)
+Supplementary_Table1<-Supplementary_Table1[,c(1:4,8)]
 
-colnames(Supplementary_Table3)<-c("Fold change", "Difference in prevalence b/w healthy and Nonhealthy",
+colnames(Supplementary_Table1)<-c("Fold change", "Difference in prevalence b/w healthy and Nonhealthy",
                                   "Health-prevalent species count","Health-scarce species count",
                                   "Classification accuracy")
 
