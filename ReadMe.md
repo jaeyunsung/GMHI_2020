@@ -19,7 +19,7 @@ Step 3: Open the GMHI.R script and load the merged MetaPhlAn2 output file (gener
 
 # Description (Figures)
 
-R scripts for reproducing the figures illustrated in the corresponding paper. Tested on R (3.6.1)
+R scripts for reproducing the figures illustrated in the corresponding paper. Tested on R (3.6.1).
 
 # Scripts
 
