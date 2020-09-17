@@ -116,9 +116,9 @@ colnames(Accuracy_table) <- c("Fold change", "Difference in coverage b/w healthy
 Supplementary_Table1<-data.frame(Accuracy_table)
 Supplementary_Table1<-Supplementary_Table1[,c(1:4,8)]
 
-colnames(Supplementary_Table1)<-c("Fold change", "Difference in prevalence b/w healthy and Nonhealthy",
+colnames(Supplementary_Table1)<-c("Fold change", "Difference",
                                   "Health-prevalent species count","Health-scarce species count",
-                                  "Classification accuracy")
+                                  "Balanced accuracy")
 
 
 # GMHI calculation for training dataset based on best classification accuracy using 1.4 fold change of prevalence and 10% of difference in prevalences between healthy and non-healthy
