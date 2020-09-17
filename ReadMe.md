@@ -39,7 +39,7 @@ Includes Figure 1 (b,c,d) generation with PERMANOVA (iterations = 999).
 
 Related with Supplementary Table 1, Table 2, and Figure 2 (a,b) generation. 
 
->R script TableS1_Table2_Fig2.R
+>R script Fig2_TableS1_Table2.R
 
 #### Figure 3
 
