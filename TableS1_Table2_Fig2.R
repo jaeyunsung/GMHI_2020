@@ -109,9 +109,9 @@ for(i in 1:length(cutoffs1)) {
 }
 
 Accuracy_table <- matrix(unlist(report), ncol = 8, byrow = TRUE)
-colnames(Accuracy_table) <- c("Fold change", "Difference in coverage b/w healthy and non-healthy",
+colnames(Accuracy_table) <- c("Fold change", "Difference",
                               "H+ count","H- count","Healthy accuracy","Non-healthy accuracy",
-                              "Total accuracy","Total average accuracy")
+                              "Total accuracy","Balanced accuracy")
 
 Supplementary_Table1<-data.frame(Accuracy_table)
 Supplementary_Table1<-Supplementary_Table1[,c(1:4,8)]
@@ -120,7 +120,10 @@ colnames(Supplementary_Table1)<-c("Fold change", "Difference",
                                   "Health-prevalent species count","Health-scarce species count",
                                   "Balanced accuracy")
 
-
+print(Supplementary_Table1)
+write.csv(Supplementary_Table1,"./Supplementary_Table_1.csv")
+			  
+			  
 # GMHI calculation for training dataset based on best classification accuracy using 1.4 fold change of prevalence and 10% of difference in prevalences between healthy and non-healthy
 final_dataset <- data.frame(t(Final_microbiome_data_4347),check.rows = F,check.names = F)
 final_dataset1 <- final_dataset[,c(1,2,11:13,15:20,33:ncol(final_dataset))]
