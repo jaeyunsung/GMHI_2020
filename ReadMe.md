@@ -1,6 +1,6 @@
 A Predictive Index for Health Status using Species-level Gut Microbiome Profiling
 =================================================================================
-DOI: 10.1038/s41467-020-18476-8
+Nature Communications (2020) https://www.nature.com/articles/s41467-020-18476-8
 
 Vinod K. Gupta, Minsuk Kim, Utpal Baksh, Kevin Y. Cunningham, John M. Davis III, Konstantinos N. Lazaridis, Heidi Nelson, Nicholas Chia, & Jaeyun Sung
 
