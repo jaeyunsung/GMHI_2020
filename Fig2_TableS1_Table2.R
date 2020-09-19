@@ -124,7 +124,7 @@ print(Supplementary_Table1)
 write.csv(Supplementary_Table1,"./Supplementary_Table_1.csv")
 			  
 			  
-# GMHI calculation for training dataset based on best classification accuracy using 1.4 fold change of prevalence and 10% of difference in prevalences between healthy and non-healthy
+# Identifying signature species and calculating GMHI based on thresholds yielding highest balanced accuracy (1.4 prevalence fold-change and 10% prevalence difference between Healthy and Non-healthy)
 final_dataset <- data.frame(t(Final_microbiome_data_4347),check.rows = F,check.names = F)
 final_dataset1 <- final_dataset[,c(1,2,11:13,15:20,33:ncol(final_dataset))]
 
@@ -138,16 +138,14 @@ final_dataset3<-data.frame(final_dataset2[-c(1:11),])
 final_dataset3[] <- lapply(final_dataset3, function(x) as.numeric(as.character(x)))
 final_dataset3[final_dataset3 < 0.001] <- 0
 
-
-# Identifying signature species
 H_signature <- data.frame(subset(all_matrix, all_matrix$PH_fold >= 1.4 & all_matrix$PH_diff >=10))
 NH_signature <- data.frame(subset(all_matrix, all_matrix$PNH_fold >= 1.4 & all_matrix$PH_diff <= -10))
 
 H_species <- row.names(H_signature)
 NH_species <- row.names(NH_signature)
 
-H_constant <- 7
-NH_constant <- 31
+H_constant <- 7 # this is |M_H|' (see corresponding Methods subsection of manuscript)
+NH_constant <- 31 # this is |M_N|' (see corresponding Methods subsection of manuscript)
 
 sp_H <- final_dataset3[row.names(final_dataset3) %in% H_species, ]
 sp_NH <- final_dataset3[row.names(final_dataset3) %in% NH_species, ]
