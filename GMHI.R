@@ -17,25 +17,27 @@ output_file = 'GMHI_output.csv'
 #------------------------------------------------------
 
 
-#Overall Steps
+# Overall Steps
 # Step-1: Run MetaPhlAn2 on a stool metagenome using '--tax_lev s' argument.
 # Step-2: Merge outputs using 'merge_metaphlan_tables.py' script provided in the MetaPhlAn2 pipeline (see MetaPhlAn2's online tutorial).
 # Step-3: Make sure of the following: The merged species' relative abundance profile should be arranged as shown in 'species_relative_abundances.csv'. Accordingly, the first column should contain names of the species-level clades (i.e., taxonomic names with 's__' flag). Subsequent columns should contain the species' relative abundances corresponding to each metagenome sample.
 # Step-4: Save input data from Step-3 as a '.csv' file, and run the following script to calculate GMHI for each stool metagenome. GMHI values for each sample in 'species_relative_abundances.csv' are shown in 'GMHI_output.csv'.
 
-#Pre-processing species profile:
-#species_profile_1: removes unclassified species
-#species_profile_2: remove virus species
-#species_profile_3: Re-normalizing to get species relative abundances after removing unclassified and virus species
+# Pre-processing species profile:
+# species_profile_1: removes unclassified species
+# species_profile_2: remove virus species
+# species_profile_3: Re-normalizing to get species relative abundances after removing unclassified and virus species
 species_profile <- read.csv(species_relative_abundance_file, sep = ",",
 							header = TRUE,row.names = 1,check.names = F) 
-species_profile_1 <- species_profile[-grep('unclassified', row.names(species_profile)),] 
-species_profile_2 <- species_profile_1[-grep('virus', row.names(species_profile_1)),]  
+library(tidyverse)
+tmp1 <- data.frame(t(species_profile),check.rows = F,check.names = F)
+species_profile_1 <- tmp1 %>% select(-contains(c("unclassified","virus")))
+species_profile_2 <- data.frame(t(species_profile_1),check.rows = F,check.names = F)
 species_profile_3 <- sweep(species_profile_2,2,colSums(species_profile_2),`/`)
 species_profile_3[species_profile_3 < 0.00001] <- 0
 
-MH_species <- parse_species_list(MH_species_file) #Health-prevalent species (7 in total)
-MN_species <- parse_species_list(MN_species_file) #Health-scarce species (43 in total)
+MH_species <- parse_species_list(MH_species_file) # Health-prevalent species (7 in total)
+MN_species <- parse_species_list(MN_species_file) # Health-scarce species (43 in total)
 
 
 # Extracting Health-prevalent species present in metagenome
