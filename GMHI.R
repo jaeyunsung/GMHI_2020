@@ -23,14 +23,14 @@ output_file = 'GMHI_output.csv'
 # Step-3: Make sure of the following: The merged species' relative abundance profile should be arranged as shown in 'species_relative_abundances.csv'. Accordingly, the first column should contain names of the species-level clades (i.e., taxonomic names with 's__' flag). Subsequent columns should contain the species' relative abundances corresponding to each metagenome sample.
 # Step-4: Save input data from Step-3 as a '.csv' file, and run the following script to calculate GMHI for each stool metagenome. GMHI values for each sample in 'species_relative_abundances.csv' are shown in 'GMHI_output.csv'.
 
-# Pre-processing species profile:
-# species_profile_1: removes unclassified species
-# species_profile_2: remove virus species
-# species_profile_3: Re-normalizing to get species relative abundances after removing unclassified and virus species
+# Pre-processing data matrix of species' relative abundances:
+# species_profile_1: Result after removing unclassified and virus species
+# species_profile_2: Result after transposing species_profile_1
+# species_profile_3: Re-normalization of species' relative abundances after removing unclassified and virus species
 species_profile <- read.csv(species_relative_abundance_file, sep = ",",
 							header = TRUE,row.names = 1,check.names = F) 
 library(tidyverse)
-tmp1 <- data.frame(t(species_profile),check.rows = F,check.names = F)
+tmp1 <- data.frame(t(species_profile),check.rows = F,check.names = F) # transposing data matrix
 species_profile_1 <- tmp1 %>% select(-contains(c("unclassified","virus")))
 species_profile_2 <- data.frame(t(species_profile_1),check.rows = F,check.names = F)
 species_profile_3 <- sweep(species_profile_2,2,colSums(species_profile_2),`/`)
@@ -59,9 +59,8 @@ R_MH <- apply(MH_species_metagenome, 2, function(i) (sum(i > 0)))
 R_MN <- apply(MN_species_metagenome, 2, function(i) (sum(i > 0)))
 
 
-# Median RMH from 1% of the top-ranked samples
-# Median RMN from 1% of the bottom-ranked samples
-# Supplementary Methods for further details
+# Median RMH from 1% of the top-ranked samples (see Methods)
+# Median RMN from 1% of the bottom-ranked samples (see Methods)
 MH_prime <- 7
 MN_prime <- 31
 
