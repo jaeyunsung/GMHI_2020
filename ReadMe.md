@@ -27,43 +27,43 @@ R scripts for reproducing the figures illustrated in the corresponding paper. Te
 
 R script to calculate the Gut Microbiome Health Index (GMHI) for a species-level gut microbiome profile.
 
->R script GMHI.R
+>Rscript GMHI.R
 
 #### Figure 1
 
 Includes Figure 1 (b,c,d) generation with PERMANOVA (iterations = 999). 
 
->R script Fig1.R
+>Rscript Fig1.R
 
 #### Supplementary Table 1, Table 2, Figure 2
 
 Related with Supplementary Table 1, Table 2, and Figure 2 (a,b) generation. 
 
->R script Fig2_TableS1_Table2.R
+>Rscript Fig2_TableS1_Table2.R
 
 #### Figure 3
 
 Related with Figure 3 (a ~ h) generation.
 
->R script Fig3.R
+>Rscript Fig3.R
 
 #### Figure 4
 
 Related with Figure 4 (a ~ b) generation.
 
->R script Fig4.R
+>Rscript Fig4.R
 
 #### Figure 5
 
 Related with Figure 5 (a ~ d) generation.
 
->R script Fig5.R
+>Rscript Fig5.R
 
 #### Figure 6
 
 Related with Figure 6 (a ~ b).
 
->R script Fig6.R
+>Rscript Fig6.R
 
 #### Data
 
